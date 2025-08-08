@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<title>Marluy Lavecchia</title>
+<style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at center, #2d1504, #3c1f06, #000000);
+      color: #f7eac9;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 440px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    }
+
+    .foto-perfil {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #f7c850;
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 16px 0 8px;
+      font-weight: 700;
+    }
+
+    .frase {
+      font-size: 14px;
+      font-weight: bold;
+      color: #f7eac9;
+      margin-top: 24px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .social-icons {
+      margin: 20px 0;
+    }
+
+    .social-icons a img {
+      width: 28px;
+      height: 28px;
+      margin: 0 8px;
+      background: #fff8e1;
+      border: 2px solid #f7c850;
+      border-radius: 50%;
+      padding: 5px;
+      filter: drop-shadow(1px 1px 1px #aaa);
+    }
+
+    .botao {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 6px auto 16px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #2d1504;
+      background: linear-gradient(to right, #ffcc00, #f7c850, #ff9900);
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .botao:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 204, 0, 1);
+    }
+
+    .descricao {
+      font-size: 13px;
+      font-style: italic;
+      color: #f1d58b;
+      margin: 14px auto 4px;
+      max-width: 320px;
+    }
+
+    .divisor {
+      height: 0.5px;
+      width: 92%;
+      margin: 20px auto;
+      background: linear-gradient(to right, #ffcc00, #f7c850, #ff9900);
+      border-radius: 1px;
+      opacity: 0.6;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background: #2d1504;
+      margin: 10% auto;
+      padding: 30px;
+      border: 2px solid #f7c850;
+      border-radius: 16px;
+      max-width: 420px;
+      box-shadow: 0 0 20px #ffcc00;
+      color: #fff8e1;
+    }
+
+    .modal-content input, .modal-content select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .modal-content button[type="submit"] {
+      background: linear-gradient(to right, #ffcc00, #f7c850, #ff9900);
+      color: #2d1504;
+      border: none;
+      border-radius: 30px;
+      padding: 14px;
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .close {
+      color: #f7eac9;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+/* ===== Ajustes finos para tipografia e estrutura (mobile-first) ===== */
+:root{
+  --font-base: 14px;
+  --font-small: 13px;
+  --font-h1: 20px;
+  --font-h2: 18px;
+}
+
+body { letter-spacing: 0.1px; }
+.container{ max-width:420px; padding:20px; margin:28px auto; }
+
+h1{ font-size: var(--font-h1); margin:12px 0 6px; }
+p{ font-size: var(--font-small); line-height: 1.45; }
+.frase{ font-size: var(--font-small); }
+.descricao{ font-size: var(--font-small); }
+.botao{ padding:12px; font-size:15px; margin:6px auto 12px; }
+
+/* Modal base */
+.modal{ display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,.8); }
+.modal-content{
+  background:#2d1504;
+  border:2px solid #f7c850;
+  border-radius:16px;
+  width:92%;
+  max-width:480px;
+  max-height:90vh;
+  margin:6vh auto;
+  padding:18px 16px 22px;
+  color:#fff8e1;
+  overflow:auto;
+  box-shadow:0 0 20px #ffcc00;
+  animation: pop .15s ease-out;
+}
+@keyframes pop{ from{ transform:scale(.98); opacity:.6 } to{ transform:scale(1); opacity:1 } }
+
+.close{
+  position: sticky;
+  top:0;
+  float: right;
+  font-size:22px;
+  line-height:1;
+  padding:2px 6px;
+  margin:-6px -6px 8px 0;
+  background:transparent;
+}
+
+/* Form padrão dentro dos modais */
+.modal-content h1{ font-size: var(--font-h1); margin-bottom:8px; }
+.modal-content h2{ font-size: var(--font-h2); margin:0 0 8px; }
+.modal-content p, .modal-content .frase{ font-size: var(--font-small); line-height:1.5; }
+
+.modal-content form{ margin-top:8px; }
+.modal-content label{ display:block; font-size: var(--font-small); margin:10px 0 4px; }
+.modal-content input,
+.modal-content select,
+.modal-content textarea{
+  width:100%;
+  padding:10px 12px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid #c9b27c;
+  background:#fff;
+  color:#2d1504;
+  font-size: var(--font-base);
+  box-sizing:border-box;
+}
+.modal-content textarea{ resize:vertical; }
+
+.modal-content .checkbox-group,
+.modal-content .radio-group{ margin:8px 0 6px; }
+.modal-content .checkbox-group label,
+.modal-content .radio-group label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:6px 0;
+  font-weight:500;
+}
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"]{ accent-color:#f7c850; }
+
+.modal-content button[type="submit"]{
+  padding:12px;
+  font-size:15px;
+  border-radius:28px;
+  width:100%;
+  margin-top:12px;
+}
+
+/* Pequenas telas */
+@media (max-width: 420px){
+  :root{ --font-base:13px; --font-small:12.5px; --font-h1:19px; --font-h2:17px; }
+  .container{ margin:20px auto; padding:18px; }
+}
+
+/* ===== Ajustes de campos e grupos ===== */
+.modal-content input,
+.modal-content select,
+.modal-content textarea{
+  font-size: var(--font-small);
+  padding: 8px 10px;
+}
+
+/* Checkbox e radio alinhados à direita */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label{
+  flex-direction: row-reverse; /* Ícone/switch à direita */
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: var(--font-small);
+}
+
+/* Colocar o símbolo de assinar (✔) na frente do texto */
+.modal-content input[type="checkbox"]::before,
+.modal-content input[type="radio"]::before{
+  content: "✔";
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 12px;
+  color: #f7c850;
+  visibility: hidden;
+}
+
+.modal-content input[type="checkbox"]:checked::before,
+.modal-content input[type="radio"]:checked::before{
+  visibility: visible;
+}
+
+/* Fundo suave atrás dos blocos de perguntas */
+.modal-content .checkbox-group,
+.modal-content .radio-group,
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: rgba(247, 200, 80, 0.08); /* marrom/dourado bem suave */
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Ajustar espaçamento interno de labels dentro de fundos */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label {
+  padding: 4px 0;
+}
+
+/* Mantém responsivo */
+@media (max-width: 420px) {
+  .modal-content .checkbox-group,
+  .modal-content .radio-group,
+  .modal-content label + input,
+  .modal-content label + select,
+  .modal-content label + textarea {
+    padding: 6px 8px;
+  }
+}
+
+/* Fundo mais claro */
+.modal-content .checkbox-group,
+.modal-content .radio-group,
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: rgba(255, 255, 255, 0.08); /* bege suave/transparente */
+}
+
+/* Alinhar inputs de seleção à direita e textos à esquerda */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label {
+  flex-direction: row; /* input à esquerda */
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-content .checkbox-group label span,
+.modal-content .radio-group label span {
+  flex: 1;
+  text-align: left;
+}
+
+/* Ajustar inputs para ficarem colados no lado direito */
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"] {
+  margin-left: auto;
+}
+
+/* Fundo creme suave */
+.modal-content .checkbox-group,
+.modal-content .radio-group,
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: rgba(255, 248, 225, 0.15); /* creme suave */
+}
+
+/* Inputs à esquerda, texto alinhado no início */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"] {
+  margin: 0;
+}
+
+/* Fundo branco para campos */
+.modal-content .checkbox-group,
+.modal-content .radio-group,
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: #ffffff; /* branco puro */
+}
+
+/* Texto escuro para contraste no fundo branco */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label {
+  color: #2d1504; /* marrom escuro */
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+/* Inputs alinhados na vertical, à esquerda, com texto colado logo após */
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"] {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Fundo branco padronizado */
+.modal-content .checkbox-group,
+.modal-content .radio-group,
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* ===== Ajuste: grupos de seleção sem fundo branco, organizados e legíveis ===== */
+
+/* Remover fundo branco dos grupos */
+.modal-content .checkbox-group,
+.modal-content .radio-group{
+  background: rgba(0,0,0,0.18);   /* painel escuro sutil, como no exemplo */
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+/* Labels claras e alinhadas, checkbox/radio à esquerda */
+.modal-content .checkbox-group label,
+.modal-content .radio-group label{
+  color: #f7eac9;                 /* texto claro */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: var(--font-small);
+}
+
+/* Mantém os seletores à esquerda */
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"]{
+  margin: 0;
+}
+
+/* Fundo branco apenas para campos de digitação (inputs/selects/textarea fora dos grupos) */
+.modal-content label + input,
+.modal-content label + select,
+.modal-content label + textarea {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Campo "Outro: [texto]" dentro do label deve ocupar espaço e ficar branco */
+.modal-content .checkbox-group label input[type="text"]{
+  background: #ffffff;
+  color: #2d1504;
+  border: 1px solid #c9b27c;
+  border-radius: 8px;
+  padding: 6px 8px;
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Pequeno respiro entre grupos e botões */
+.modal-content button[type="submit"]{ margin-top: 14px; }
+
+/* ===== Alinhamento final dos grupos (como no mock): checkbox à esquerda, texto alinhado do começo, tudo dentro do painel ===== */
+.modal-content .checkbox-group,
+.modal-content .radio-group{
+  background: rgba(0,0,0,0.18);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.modal-content .checkbox-group label,
+.modal-content .radio-group label{
+  color: #f7eac9;
+  display: grid;
+  grid-template-columns: 20px 1fr; /* ícone 20px + texto ocupando o resto */
+  align-items: center;
+  column-gap: 10px;
+  padding: 6px 0;
+  justify-content: unset;
+  text-align: left;
+  width: 100%;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.modal-content input[type="checkbox"],
+.modal-content input[type="radio"]{
+  margin: 0;             /* sem empurrar nada */
+  justify-self: start;   /* fica colado à esquerda do grid */
+}
+
+.modal-content .checkbox-group label input[type="text"]{
+  background: #ffffff;
+  color: #2d1504;
+  border: 1px solid #c9b27c;
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-width: 160px;
+  width: 100%;
+}
+
+/* Correção de possível estilo antigo que empurrava itens para a direita */
+.modal-content .checkbox-group label span,
+.modal-content .radio-group label span{
+  flex: initial;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<img alt="Foto Marluy" class="foto-perfil" src="IMG_7339.JPG"/>
+<h1>Marluy Lavecchia</h1>
+<p>Mentora internacional em liderança e transformação de vidas e organizações. Criadora da metodologia Liderança Poderosa, com mais de 30 anos de experiência impactando mais de 3,5 milhões de pessoas e empresas no Brasil e no mundo por meio de palestras, treinamentos, programas de TV e rádio.</p>
+<hr class="divisor"/>
+<p class="frase">CONECTE-SE COM MARLUY</p>
+<div class="social-icons">
+<a href="whatsapp.html" ><img alt="WhatsApp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"/></a>
+<a href="https://www.instagram.com/marluylavecchia/" target="_blank" rel="noopener"><img alt="Instagram" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"/></a>
+<a href="https://www.youtube.com/@marluylavecchia4133" target="_blank" rel="noopener"><img alt="YouTube" src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"/></a>
+</div>
+<hr class="divisor"/>
+<p class="descricao">Clique abaixo para receber seu e-book gratuito agora mesmo:</p>
+<button class="botao" onclick="document.getElementById('formModal').style.display='block'">E-book Gratuito</button>
+<hr class="divisor"/>
+<p class="descricao">Novo país, novos desafios... você não precisa enfrentar sozinho.</p>
+<button class="botao" onclick="document.getElementById('modal_apoio').style.display='block'">Apoio ao Imigrante</button>
+<hr class="divisor"/>
+<p class="descricao">Fortaleça o amor, supere os desafios e viva a prosperidade a dois.</p>
+<button class="botao" onclick="document.getElementById('modal_casais').style.display='block'">Poder A2 - Mentoria para Casais</button>
+<hr class="divisor"/>
+<p class="descricao">Supere bloqueios, transforme sua dor em força e construa uma vida de prosperidade e amor-próprio.</p>
+<button class="botao" onclick="document.getElementById('modal_solteiros').style.display='block'">Ser A1 - Solteiros e Separados</button>
+<hr class="divisor"/>
+<p class="descricao">Transforme sua equipe, desenvolva líderes e alcance resultados extraordinários.</p>
+<button class="botao" onclick="document.getElementById('modal_empresarios').style.display='block'">Empresários</button>
+<hr class="divisor"/>
+<p class="descricao">Imersões que inspiram, transformam e marcam uma nova fase na sua vida.</p>
+<button class="botao" onclick="document.getElementById('modal_eventos').style.display='block'">Eventos Presenciais</button>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="formModal">
+<div class="modal-content">
+<span class="close" onclick="document.getElementById('formModal').style.display='none'">×</span>
+<h2>Receba seu E-book</h2>
+<form action="https://formsubmit.co/services.go.viral@gmail.com" method="POST">
+<input name="_next" type="hidden" value="https://wa.me/5518981148812"/>
+<input name="_captcha" type="hidden" value="false"/>
+<input name="Nome" placeholder="Nome completo" required type="text"/>
+<input name="Email" placeholder="E-mail" required type="email"/>
+<input name="Telefone" placeholder="Telefone / WhatsApp" type="tel"/>
+<select name="País de residência" required>
+<option disabled selected value="">País de residência</option>
+<option>Brasil</option>
+<option>Irlanda</option>
+<option>Portugal</option>
+<option>Outros</option>
+</select>
+<select name="Estado civil">
+<option disabled selected value="">Estado civil</option>
+<option>Solteiro</option>
+<option>Casado</option>
+<option>Separado</option>
+<option>Viúvo</option>
+</select>
+<select name="Possui filhos?">
+<option disabled selected value="">Possui filhos?</option>
+<option>Não</option>
+<option>Sim - 0 a 5 anos</option>
+<option>Sim - 6 a 12 anos</option>
+<option>Sim - 13 anos ou mais</option>
+</select>
+<button type="submit">Receber meu E-book</button>
+</form>
+</div>
+</div>
+
+<div class="modal" id="modal_apoio">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+    <span class="close" onclick="document.getElementById('modal_apoio').style.display='none'">×</span>
+    <div class="container">
+    <h1>🌍 Apoio ao Imigrante</h1>
+    <p class="frase">Morar fora do país envolve enfrentar muitos desafios — emocionais, culturais, familiares e até espirituais.<br>Mas você não precisa passar por isso sozinho(a).<br>Estamos aqui para te ouvir, te apoiar e caminhar com você nessa nova fase.</p>
+
+    <p><strong>👉 Clique aqui para entrar em contato comigo ou com minha equipe e marcar um horário gratuito para conhecer a nossa proposta personalizada para você.</strong></p>
+
+    <form action="https://formsubmit.co/leads@marluylavecchia.com" method="POST">
+      <input type="hidden" name="_next" value="https://wa.me/353838824392" />
+      <input type="hidden" name="_captcha" value="false" />
+
+      <h3>🔹 1. DADOS PESSOAIS</h3>
+      <label>Nome completo:</label>
+      <input type="text" name="Nome" required />
+      <label>E-mail:</label>
+      <input type="email" name="Email" required />
+      <label>WhatsApp (com DDI):</label>
+      <input type="tel" name="WhatsApp" required />
+      <label>País onde mora atualmente:</label>
+      <input type="text" name="PaisAtual" required />
+      <label>Cidade:</label>
+      <input type="text" name="Cidade" />
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="ComQuemVeio[]" value="Sozinho(a)"> Sozinho(a)</label>
+        <label><input type="checkbox" name="ComQuemVeio[]" value="Com parceiro(a)"> Com parceiro(a)</label>
+        <label><input type="checkbox" name="ComQuemVeio[]" value="Com filhos"> Com filhos</label>
+        <label><input type="checkbox" name="ComQuemVeio[]" value="Com toda a família"> Com toda a família</label>
+      </div>
+
+      <h3>🔹 2. SITUAÇÃO ATUAL</h3>
+      <div class="radio-group">
+        <label><input type="radio" name="TempoFora" value="Menos de 6 meses" required> Menos de 6 meses</label>
+        <label><input type="radio" name="TempoFora" value="Entre 6 meses e 1 ano"> Entre 6 meses e 1 ano</label>
+        <label><input type="radio" name="TempoFora" value="De 1 a 3 anos"> De 1 a 3 anos</label>
+        <label><input type="radio" name="TempoFora" value="Mais de 3 anos"> Mais de 3 anos</label>
+      </div>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="SituacaoAtual[]" value="Sim"> Sim (trabalhando)</label>
+        <label><input type="checkbox" name="SituacaoAtual[]" value="Não"> Não</label>
+        <label><input type="checkbox" name="SituacaoAtual[]" value="Procuro trabalho"> Procuro trabalho</label>
+        <label><input type="checkbox" name="SituacaoAtual[]" value="Empreendendo"> Empreendendo</label>
+      </div>
+
+      <h3>🔹 3. QUESTÕES EMOCIONAIS</h3>
+      <label>Qual tem sido seu maior desafio emocional desde que migrou?</label>
+      <textarea name="DesafioEmocional" rows="3"></textarea>
+
+      <label>Você sente que está conseguindo cuidar de si em meio a tantas mudanças?</label>
+      <select name="CuidaDeSi">
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Mais ou menos">Mais ou menos</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>O que você gostaria de transformar em sua vida neste momento?</label>
+      <textarea name="TransformacaoDesejada" rows="3"></textarea>
+
+      <h3>🔹 4. INTERESSE EM ACOMPANHAMENTO</h3>
+      <div class="radio-group">
+        <label><input type="radio" name="Interesse" value="Sim"> Sim</label>
+        <label><input type="radio" name="Interesse" value="Ainda estou avaliando"> Ainda estou avaliando</label>
+        <label><input type="radio" name="Interesse" value="Só quero receber informações"> Só quero receber informações</label>
+      </div>
+
+      <label>Qual o melhor horário para entrarmos em contato com você?</label>
+      <input type="text" name="HorarioMelhorContato" />
+
+      <button type="submit">Enviar Informações</button>
+    </form>
+
+    <p class="encerramento">
+      Obrigada por compartilhar suas informações com carinho.<br>
+      Estamos aqui para te acolher, te ouvir e te ajudar a seguir sua jornada com mais leveza, força interior e propósito.<br>
+      Você não está só.
+    </p>
+  </div>
+  </div>
+</div>
+
+<div class="modal" id="modal_casais">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+    <span class="close" onclick="document.getElementById('modal_casais').style.display='none'">×</span>
+    <div class="container">
+<h1>💞 Mentoria para Casais – Poder A2</h1>
+<p class="frase">Fortaleça o amor, supere os desafios e viva a prosperidade a dois.</p>
+<p>Se você deseja transformar seu relacionamento, alinhar propósitos e prosperar junto com seu par, preencha os dados abaixo. Nossa equipe entrará em contato para apresentar como a Mentoria Poder A2 pode transformar a vida de vocês.</p>
+<form action="https://formsubmit.co/leads@marluylavecchia.com" method="POST">
+<input name="_next" type="hidden" value="https://wa.me/353838824392?text=Ol%C3%A1%21%20%E2%9D%A4%20Seja%20muito%20bem-vindo%28a%29%21%20Percebemos%20que%20voc%C3%AA%20chegou%20at%C3%A9%20n%C3%B3s%20pelo%20atendimento%20de%20relacionamentos%20e%20casais.%20Que%20este%20seja%20um%20espa%C3%A7o%20de%20cuidado%20e%20transforma%C3%A7%C3%A3o%2C%20para%20fortalecer%20o%20amor%20e%20viver%20uma%20conex%C3%A3o%20mais%20verdadeira%20e%20feliz.%20%E2%9C%A8"/>
+<input name="_captcha" type="hidden" value="false"/>
+<input name="Nome" placeholder="Nome completo" required="" type="text"/>
+<input name="Email" placeholder="E-mail" required="" type="email"/>
+<input name="Telefone" placeholder="Telefone / WhatsApp" required="" type="tel"/>
+<select name="País de residência" required="">
+<option disabled="" selected="" value="">País de residência</option>
+<option>Brasil</option>
+<option>Irlanda</option>
+<option>Portugal</option>
+<option>Outros</option>
+</select>
+<select name="Está em um relacionamento atualmente?" required="">
+<option disabled="" selected="" value="">Está em um relacionamento atualmente?</option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+<select name="Há quanto tempo estão juntos?">
+<option disabled="" selected="" value="">Há quanto tempo estão juntos?</option>
+<option>0-1 anos</option>
+<option>2-5 anos</option>
+<option>6-10 anos</option>
+<option>10+ anos</option>
+</select>
+<select name="Desafio no relacionamento?">
+<option disabled="" selected="" value="">Enfrenta algum desafio no seu relacionamento?</option>
+<option>Sim</option>
+<option>Não</option>
+<option>Prefiro não responder</option>
+</select>
+<div class="checkbox-group">
+<p><strong>Objetivos com a mentoria:</strong></p>
+<label><input name="Objetivos[]" type="checkbox" value="Melhorar comunicação"/> Melhorar comunicação</label>
+<label><input name="Objetivos[]" type="checkbox" value="Aumentar conexão e intimidade"/> Aumentar conexão e intimidade</label>
+<label><input name="Objetivos[]" type="checkbox" value="Prosperidade financeira e projetos a dois"/> Prosperidade financeira e projetos a dois</label>
+<label><input name="Objetivos[]" type="checkbox" value="Superar desafios emocionais ou crises"/> Superar desafios emocionais ou crises</label>
+<label><input name="Objetivos[]" type="checkbox" value="Outro"/> Outro</label>
+</div>
+<button type="submit">Confirmar Mudança de Vida</button>
+</form>
+</div>
+  </div>
+</div>
+
+<div class="modal" id="modal_solteiros">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+    <span class="close" onclick="document.getElementById('modal_solteiros').style.display='none'">×</span>
+    <div class="container">
+    <h1>🌱 Mentoria Individual para Solteiros e Separados</h1>
+    <p class="frase">Supere bloqueios, transforme sua dor em força e construa uma vida de prosperidade e amor-próprio.</p>
+    <p>Se você está solteiro(a) ou separado(a) e deseja curar feridas, superar desafios emocionais e preparar-se para viver relacionamentos saudáveis e uma vida de prosperidade, preencha os dados abaixo. Nossa equipe entrará em contato para apresentar como a Mentoria Individual pode transformar a sua jornada.</p>
+
+    <form action="https://formsubmit.co/leads@marluylavecchia.com" method="POST">
+      <input type="hidden" name="_next" value="https://wa.me/353838824392?text=Ol%C3%A1%21%20%F0%9F%92%94%20Seja%20muito%20bem-vindo%28a%29%21%20Percebemos%20que%20voc%C3%AA%20chegou%20at%C3%A9%20n%C3%B3s%20pelo%20atendimento%20de%20separa%C3%A7%C3%A3o%20e%20reconstru%C3%A7%C3%A3o%20emocional.%20Aqui%20voc%C3%AA%20encontra%20acolhimento%20e%20caminhos%20para%20superar%20a%20dor%2C%20resgatar%20sua%20for%C3%A7a%20interior%20e%20escrever%20novos%20cap%C3%ADtulos%20para%20sua%20vida.%20%F0%9F%8C%88">
+      <input type="hidden" name="_captcha" value="false">
+
+      <input type="text" name="Nome" placeholder="Nome completo" required>
+      <input type="email" name="Email" placeholder="E-mail" required>
+      <input type="tel" name="Telefone" placeholder="Telefone / WhatsApp" required>
+
+      <select name="País de residência" required>
+        <option value="" disabled selected>País de residência</option>
+        <option>Brasil</option>
+        <option>Irlanda</option>
+        <option>Portugal</option>
+        <option>Outros</option>
+      </select>
+
+      <select name="Estado civil">
+        <option value="" disabled selected>Estado civil</option>
+        <option>Solteiro</option>
+        <option>Separado</option>
+        <option>Viúvo</option>
+      </select>
+
+      <select name="Aberto a novo relacionamento?">
+        <option value="" disabled selected>Está aberto(a) a um novo relacionamento?</option>
+        <option>Sim</option>
+        <option>Não</option>
+        <option>Talvez</option>
+      </select>
+
+      <div class="checkbox-group">
+        <p><strong>Maiores desafios emocionais atualmente:</strong></p>
+        <label><input type="checkbox" name="Desafios[]" value="Solidão"> Solidão</label>
+        <label><input type="checkbox" name="Desafios[]" value="Dificuldade em confiar"> Dificuldade em confiar</label>
+        <label><input type="checkbox" name="Desafios[]" value="Medo de se entregar novamente"> Medo de se entregar novamente</label>
+        <label><input type="checkbox" name="Desafios[]" value="Autoestima / amor-próprio"> Autoestima / amor-próprio</label>
+        <label><input type="checkbox" name="Desafios[]" value="Outro"> Outro: <input type="text" name="Outro desafio" placeholder="Descreva"></label>
+      </div>
+
+      <button type="submit">Confirmar Mudança de Vida</button>
+    </form>
+  </div>
+  </div>
+</div>
+
+<div class="modal" id="modal_empresarios">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+    <span class="close" onclick="document.getElementById('modal_empresarios').style.display='none'">×</span>
+    <div class="container">
+    <h1>🏢 Treinamento Empresarial</h1>
+    <p class="frase">Transforme sua equipe, desenvolva líderes e alcance resultados extraordinários.</p>
+    <p>Se você é empresário, gestor ou RH e deseja desenvolver pessoas e transformar os resultados da sua empresa, preencha os dados abaixo. Nossa equipe apresentará treinamentos, palestras e programas sob medida para o crescimento do seu negócio.</p>
+
+    <form action="https://formsubmit.co/leads@marluylavecchia.com" method="POST">
+      <input type="hidden" name="_next" value="https://wa.me/353838824392?text=Ol%C3%A1%21%20%F0%9F%92%BC%20Seja%20muito%20bem-vindo%28a%29%21%20Percebemos%20que%20voc%C3%AA%20chegou%20at%C3%A9%20n%C3%B3s%20pelo%20atendimento%20de%20desenvolvimento%20humano%20e%20organizacional.%20Conte%20com%20a%20gente%20para%20impulsionar%20pessoas%2C%20equipes%20e%20resultados%20de%20forma%20humana%20e%20estrat%C3%A9gica.%20%F0%9F%9A%80">
+      <input type="hidden" name="_captcha" value="false">
+
+      <input type="text" name="Nome" placeholder="Nome completo" required>
+      <input type="email" name="Email" placeholder="E-mail corporativo" required>
+      <input type="tel" name="Telefone" placeholder="Telefone / WhatsApp" required>
+      <input type="text" name="Empresa" placeholder="Empresa" required>
+      <input type="text" name="Cargo" placeholder="Cargo / Função" required>
+
+      <select name="Tamanho da equipe">
+        <option value="" disabled selected>Tamanho da equipe</option>
+        <option>1-10</option>
+        <option>11-50</option>
+        <option>51-200</option>
+        <option>200+</option>
+      </select>
+
+      <div class="checkbox-group">
+        <p><strong>Interesses principais:</strong></p>
+        <label><input type="checkbox" name="Interesses[]" value="Treinamentos de liderança e alta performance"> Treinamentos de liderança e alta performance</label>
+        <label><input type="checkbox" name="Interesses[]" value="Palestras motivacionais e comportamentais"> Palestras motivacionais e comportamentais</label>
+        <label><input type="checkbox" name="Interesses[]" value="Desenvolvimento de equipes e comunicação"> Desenvolvimento de equipes e comunicação</label>
+        <label><input type="checkbox" name="Interesses[]" value="Programas de inteligência emocional e engajamento"> Programas de inteligência emocional e engajamento</label>
+        <label><input type="checkbox" name="Interesses[]" value="Consultoria em transformação organizacional"> Consultoria em transformação organizacional</label>
+        <label><input type="checkbox" name="Interesses[]" value="Outro"> Outro: <input type="text" name="Outro interesse" placeholder="Descreva"></label>
+      </div>
+
+      <button type="submit">Confirmar Interesse Corporativo</button>
+    </form>
+  </div>
+  </div>
+</div>
+
+<div class="modal" id="modal_eventos">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+    <span class="close" onclick="document.getElementById('modal_eventos').style.display='none'">×</span>
+    <div class="container">
+    <h1>🎤 Próximos Eventos e Programas Vivenciais</h1>
+    <p class="frase">Imersões que inspiram, transformam e marcam uma nova fase na sua vida.</p>
+    <p>Quer ser avisado(a) sobre nossos próximos eventos, imersões e programas vivenciais?<br>
+    Preencha os dados abaixo para receber informações em primeira mão e garantir oportunidades exclusivas de participação com desconto especial.</p>
+
+    <form action="https://formsubmit.co/leads@marluylavecchia.com" method="POST">
+      <input type="hidden" name="_next" value="https://wa.me/353838824392?text=Ol%C3%A1%21%20%F0%9F%8C%9F%20Seja%20muito%20bem-vindo%28a%29%21%20Percebemos%20que%20voc%C3%AA%20chegou%20at%C3%A9%20n%C3%B3s%20pelo%20interesse%20em%20nossos%20eventos%20presenciais%20e%20imers%C3%B5es%20transformadoras.%20Que%20esta%20seja%20uma%20oportunidade%20%C3%BAnica%20para%20viver%20experi%C3%AAncias%20profundas%2C%20conex%C3%B5es%20verdadeiras%20e%20expans%C3%A3o%20da%20sua%20lideran%C3%A7a%20interior.%20%F0%9F%8C%88">
+      <input type="hidden" name="_captcha" value="false">
+
+      <input type="text" name="Nome" placeholder="Nome completo" required>
+      <input type="email" name="Email" placeholder="E-mail" required>
+      <input type="tel" name="Telefone" placeholder="Telefone / WhatsApp" required>
+
+      <select name="País de residência" required>
+        <option value="" disabled selected>País de residência</option>
+        <option>Brasil</option>
+        <option>Irlanda</option>
+        <option>Portugal</option>
+        <option>Outros</option>
+      </select>
+
+      <input type="text" name="CidadeEstado" placeholder="Cidade / Estado (opcional)">
+
+      <div class="checkbox-group">
+        <p><strong>Qual evento você tem interesse?</strong></p>
+        <label><input type="checkbox" name="Interesse[]" value="DLP – Despertar da Liderança Poderosa"> DLP – Despertar da Liderança Poderosa</label>
+        <label><input type="checkbox" name="Interesse[]" value="JLP – Jornada da Liderança Poderosa"> JLP – Jornada da Liderança Poderosa</label>
+        <label><input type="checkbox" name="Interesse[]" value="A Cura da Alma"> A Cura da Alma</label>
+        <label><input type="checkbox" name="Interesse[]" value="Workshops e Imersões Temáticas"> Workshops e Imersões Temáticas</label>
+        <label><input type="checkbox" name="Interesse[]" value="Todos os programas vivenciais"> Todos os programas vivenciais</label>
+      </div>
+
+      <select name="Deseja receber ofertas?">
+        <option value="" disabled selected>Deseja receber ofertas especiais?</option>
+        <option>Sim</option>
+        <option>Não</option>
+      </select>
+
+      <button type="submit">Quero Ser Avisado(a)</button>
+    </form>
+  </div>
+  </div>
+</div>
+</body>
+</html>
