@@ -523,7 +523,7 @@ p{ font-size: var(--font-small); line-height: 1.45; }
 <button class="botao" onclick="document.getElementById('modal_casais').style.display='block'">Poder A2 - Mentoria para Casais</button>
 <hr class="divisor"/>
 <p class="descricao">Supere bloqueios, transforme sua dor em força e construa uma vida de prosperidade e amor-próprio.</p>
-<button class="botao" onclick="document.getElementById('modal_solteiros').style.display='block'">Ser A1 - Solteiros e Separados</button>
+<button class="botao" onclick="document.getElementById('modal_solteiros').style.display='block'">Solteiros e Separados</button>
 <hr class="divisor"/>
 <p class="descricao">Transforme sua equipe, desenvolva líderes e alcance resultados extraordinários.</p>
 <button class="botao" onclick="document.getElementById('modal_empresarios').style.display='block'">Empresários</button>
@@ -537,34 +537,34 @@ p{ font-size: var(--font-small); line-height: 1.45; }
 <div class="modal-content">
 <span class="close" onclick="document.getElementById('formModal').style.display='none'">×</span>
 <h2>Receba seu E-book</h2>
-<form action="https://formsubmit.co/services.go.viral@gmail.com" method="POST">
-<input name="_next" type="hidden" value="https://wa.me/5518981148812"/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="Nome" placeholder="Nome completo" required type="text"/>
-<input name="Email" placeholder="E-mail" required type="email"/>
-<input name="Telefone" placeholder="Telefone / WhatsApp" type="tel"/>
-<select name="País de residência" required>
-<option disabled selected value="">País de residência</option>
-<option>Brasil</option>
-<option>Irlanda</option>
-<option>Portugal</option>
-<option>Outros</option>
-</select>
-<select name="Estado civil">
-<option disabled selected value="">Estado civil</option>
-<option>Solteiro</option>
-<option>Casado</option>
-<option>Separado</option>
-<option>Viúvo</option>
-</select>
-<select name="Possui filhos?">
-<option disabled selected value="">Possui filhos?</option>
-<option>Não</option>
-<option>Sim - 0 a 5 anos</option>
-<option>Sim - 6 a 12 anos</option>
-<option>Sim - 13 anos ou mais</option>
-</select>
-<button type="submit">Receber meu E-book</button>
+<form action="https://formsubmit.co/services.go.viral@gmail.com" method="POST" id="ebookForm">
+  <input type="hidden" name="_next" value="https://wa.me/353838824392?text=Ol%C3%A1.%20Acabei%20de%20baixar%20o%20e-book%20%27O%20Segredo%20da%20Lideran%C3%A7a%20Poderosa%27.%20Vim%20pelo%20e-book%20e%20tenho%20interesse%20em%20saber%20mais."/>
+  <input type="hidden" name="_captcha" value="false"/>
+  <input name="Nome" placeholder="Nome completo" required type="text"/>
+  <input name="Email" placeholder="E-mail" required type="email"/>
+  <input name="Telefone" placeholder="Telefone / WhatsApp" type="tel"/>
+  <select name="País de residência" required>
+    <option disabled selected value="">País de residência</option>
+    <option>Brasil</option>
+    <option>Irlanda</option>
+    <option>Portugal</option>
+    <option>Outros</option>
+  </select>
+  <select name="Estado civil">
+    <option disabled selected value="">Estado civil</option>
+    <option>Solteiro</option>
+    <option>Casado</option>
+    <option>Separado</option>
+    <option>Viúvo</option>
+  </select>
+  <select name="Possui filhos?">
+    <option disabled selected value="">Possui filhos?</option>
+    <option>Não</option>
+    <option>Sim - 0 a 5 anos</option>
+    <option>Sim - 6 a 12 anos</option>
+    <option>Sim - 13 anos ou mais</option>
+  </select>
+  <button type="submit">Receber meu E-book</button>
 </form>
 </div>
 </div>
@@ -847,5 +847,20 @@ p{ font-size: var(--font-small); line-height: 1.45; }
   </div>
   </div>
 </div>
+
+
+<script>
+  (function() {
+    var form = document.getElementById('ebookForm');
+    if (form) {
+      form.addEventListener('submit', function() {
+        try {
+          window.open('https://www.dropbox.com/scl/fi/n57eho7wlttgcjndez222/O-Segredo-da-Lideran-a-Poderosa-Marluy-Lavecchia.pdf?rlkey=1nobguslqddn3pzlhm4dyen29&dl=1', '_blank');
+        } catch(e) {}
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>
